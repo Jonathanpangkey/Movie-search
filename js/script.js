@@ -1,6 +1,7 @@
 // search function
 function searchMovie() {
 	$("#movie-list").html("");
+
 	// ajax request
 	$.ajax({
 		url: "https://omdbapi.com",
@@ -14,6 +15,7 @@ function searchMovie() {
 			// if success add data use card bootstrap
 			if (result.Response == "True") {
 				let movies = result.Search;
+
 				// loop the data use each
 				$.each(movies, function (i, data) {
 					$("#movie-list").append(`
@@ -30,21 +32,24 @@ function searchMovie() {
                     `);
 				});
 
+				// remove the value in input
 				$("#search-input").val("");
-			} else {
-				$("#movie-list").html(
-					`
+			} 
+			
+			else {
+				$("#movie-list").html(`
                     <div class="col">
                         <h1 class="text-center">` +
 						result.Error +
 						`</h1>
                     </div>
-                `
-				);
+                `);
+
 			}
 		},
 	});
 }
+
 // click event
 $("#search-button").on("click", () => {
 	searchMovie();
@@ -71,8 +76,7 @@ $("#movie-list").on("click", ".see-detail", function () {
 		success: function (movie) {
 			if (movie.Response == "True") {
 				// add modal body
-				$(".modal-body").html(
-					`
+				$(".modal-body").html(`
                 <div class="container-fluid">
                 <div class="row text-dark">
                     <div class="col-md-4">
@@ -107,8 +111,7 @@ $("#movie-list").on("click", ".see-detail", function () {
 						`</p>
                 </div>
                 </div>
-                `
-				);
+                `);
 			}
 		},
 	});
